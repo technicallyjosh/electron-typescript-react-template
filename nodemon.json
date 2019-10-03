@@ -1,0 +1,4 @@
+{
+  "watch": "dist/main",
+  "exec": "electron dist/main/main.js"
+}
