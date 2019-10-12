@@ -4,7 +4,7 @@ import { Header } from 'semantic-ui-react';
 
 render(
   <Header as="h2" block>
-    Login
+    Hello!
   </Header>,
   document.getElementById('content'),
 );

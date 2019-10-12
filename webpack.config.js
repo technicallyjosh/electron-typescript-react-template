@@ -7,9 +7,9 @@ const titlePrefix = 'TC Notifier';
 
 const pages = [
   {
-    title: `${titlePrefix} Login`,
-    name: 'login',
-    chunks: ['login'],
+    title: `${titlePrefix} Home`,
+    name: 'home',
+    chunks: ['Home'],
   },
 ];
 
@@ -21,7 +21,7 @@ module.exports = {
   devtool: 'source-map',
   target: 'electron-renderer',
   entry: {
-    login: './src/app/Login.tsx',
+    home: './src/app/Home.tsx',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -51,15 +51,13 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: resolve('./src/app/static/images'),
-        to: resolve('./dist/app/images'),
-      },
-      {
         from: resolve('./node_modules/semantic-ui-css/semantic.min.css'),
         to: resolve('./dist/app/css/semantic.min.css'),
       },
       {
-        from: resolve('./node_modules/semantic-ui-css/themes/default/assets/fonts'),
+        from: resolve(
+          './node_modules/semantic-ui-css/themes/default/assets/fonts',
+        ),
         to: resolve('./dist/app/css/themes/default/assets/fonts'),
       },
     ]),
