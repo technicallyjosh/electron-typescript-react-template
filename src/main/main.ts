@@ -1,18 +1,21 @@
 import { app, BrowserWindow } from 'electron';
-import { resolve } from 'path';
+import { join } from 'path';
 
-function createWindow() {
+function createWindows() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  const homeWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-    },
   });
 
-  // and load the index.html of the app.
-  win.loadFile(resolve('./dist/app/login.html'));
+  const aboutWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+  });
+
+  // and load the home.html of the app.
+  homeWindow.loadFile(join(__dirname, '../app/home.html'));
+  aboutWindow.loadFile(join(__dirname, '../app/about.html'));
 }
 
-app.on('ready', createWindow);
+app.on('ready', createWindows);

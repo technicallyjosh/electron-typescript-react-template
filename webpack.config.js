@@ -7,9 +7,9 @@ const titlePrefix = 'TC Notifier';
 
 const pages = [
   {
-    title: `${titlePrefix} Home`,
-    name: 'home',
-    chunks: ['Home'],
+    title: `${titlePrefix} About`,
+    name: 'about',
+    chunks: ['about'],
   },
 ];
 
@@ -22,13 +22,14 @@ module.exports = {
   target: 'electron-renderer',
   entry: {
     home: './src/app/Home.tsx',
+    about: './src/app/About.tsx',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   output: {
     path: resolve('./dist/app'),
-    filename: 'js/[name].js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -38,6 +39,9 @@ module.exports = {
         use: [
           {
             loader: 'ts-loader',
+            options: {
+              configFile: resolve('./src/app/tsconfig.json'),
+            },
           },
         ],
       },
@@ -62,12 +66,13 @@ module.exports = {
       },
     ]),
     new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/]),
-    // index page
+    // home page
     new HtmlWebpackPlugin({
       ...htmlDefaults,
       title: `${titlePrefix} Home`,
-      name: 'app',
-      chunks: ['app'],
+      name: 'home',
+      filename: 'home.html',
+      chunks: ['home'],
     }),
     // all other pages
     ...pages.map(
@@ -81,11 +86,6 @@ module.exports = {
         }),
     ),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
   watchOptions: {
     ignored: ['dist', 'node_modules'],
   },

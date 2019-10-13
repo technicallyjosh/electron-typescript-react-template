@@ -1,42 +1,61 @@
 {
-  "name": "tc-notifier",
+  "name": "electron-typescript-react-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "A starter template for Electron/React apps with TypeScript",
   "private": true,
+  "main": "dist/main/main.js",
   "scripts": {
-    "build:dev": "tsc && webpack --mode development",
-    "build:prod": "tsc && webpack --mode production",
-    "watch:main": "tsc --watch",
+    "serve": "nodemon",
+    "dev": "npm i && npm run build:dev && run-p watch:* serve",
+    "clean": "rimraf build dist",
+    "build:dev": "run-s clean build:dev:*",
+    "build:prod": "run-s clean build:prod:*",
+    "build:dev:main": "tsc -p src/main",
+    "build:dev:app": "webpack --mode development",
+    "build:prod:app": "webpack --mode production",
+    "watch:main": "tsc -p src/main --watch",
     "watch:app": "webpack --mode development -w",
-    "start": "nodemon",
-    "dev": "npm run build:dev && run-p watch:* start"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
-    "teamcity",
-    "build",
-    "notifications"
+    "electron",
+    "typescript",
+    "react"
   ],
   "author": {
     "name": "Josh Newman",
     "url": "https://technicallyjosh.com"
   },
   "license": "ISC",
+  "build": {
+    "appId": "my.id",
+    "mac": {
+      "category": "my.app.category.type"
+    },
+    "directories": {
+      "output": "build"
+    }
+  },
   "devDependencies": {
-    "@types/react": "^16.9.4",
+    "@types/react": "^16.9.5",
     "@types/react-dom": "^16.9.1",
     "copy-webpack-plugin": "^5.0.4",
-    "electron": "^6.0.11",
+    "electron": "^6.0.12",
+    "electron-builder": "^21.2.0",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "nodemon": "^1.19.3",
     "npm-run-all": "^4.1.5",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "rimraf": "^3.0.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.0",
-    "typescript": "^3.6.3",
-    "webpack": "^4.41.0",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
   }
 }
